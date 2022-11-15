@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Working days</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+      </head> 
+<body>
+    <div class="container-fluid">
+        <div class="jumbotron">
+        <form action="" method="get">
+        <input type="month" name="month" value="2022-10" max="2022-11" min="">
+        <input type="submit" value="Get dates" class="btn btn-primary">
+    </form>
+    {% if not month_year %}
+            
+    {% else %}
+
+            <h2 class="display-4">{{numberOfWorkingDays}} working days in {{month_name}} {{year}}</h2>
+            
+            
+            {% if public_holiday_list == [] %}
+                No public holidays
+            {% else %}
+            {% for x in public_holiday_list %}
+            <p class="lead">{{numberOfHolidays}} public holidays: {{x}}
+                {{ "," if not loop.last else "" }}
+                {%endfor%}
+            {% endif %}
+            </p>
+
+        </div>
+        
+        
+            <h4>Dates</h4>
+        <ul>
+        {% for d in day %}
+             <li>{{d}}</li>
+        {%endfor%}
+        {% endif %}
+
+    </ul>
+    
+</div>
+</body>
+</html>
