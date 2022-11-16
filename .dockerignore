@@ -1,0 +1,7 @@
+Dockerfile
+*.yaml
+venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
