@@ -88,4 +88,4 @@ def workingDays():
             return render_template('index.html', day=workingDay, month_year=month_year, month=month, year=year, numberOfWorkingDays=numberOfWorkingDays, numberOfHolidays=numberOfHolidays, month_name=month_name, public_holidays=public_holidays, public_holiday_list=public_holiday_list)
 
 if __name__ == "__main__":
-    app.run(debug=False, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
+    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
