@@ -11,7 +11,7 @@ env
 .env
 .vscode
 .data
+.cache-stiffey
 cert.pem
 key.pem
 .dockerignore
-.gitignore

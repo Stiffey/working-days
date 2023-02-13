@@ -13,12 +13,9 @@ app = Flask(__name__)
 @app.route('/', methods=('GET', 'POST'))
 def workingDays():
     month_year = request.args.get("month")
-    
     months = ['January', "Febuary", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-
     holidaysJSON = requests.get("https://www.gov.uk/bank-holidays.json")
     ukHolidaysJSON = json.loads(holidaysJSON.text)['england-and-wales']['events']
-
     min_date = ukHolidaysJSON[0]['date']
     min_date_yyyy_mm = min_date[0:7]
     max_date = ukHolidaysJSON[-1]['date']
@@ -97,5 +94,7 @@ def workingDays():
 
             return render_template('index.html', day=workingDay, month_year=month_year, month=month, year=year, numberOfWorkingDays=numberOfWorkingDays, numberOfHolidays=numberOfHolidays, month_name=month_name, public_holidays=public_holidays, public_holiday_list=public_holiday_list, current_month_yyyy_mm=current_month_yyyy_mm, min_date_yyyy_mm=min_date_yyyy_mm, max_date_yyyy_mm=max_date_yyyy_mm)
 
-if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+# if __name__ == "__main__":
+#     # app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+#     # app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
+#     app.run('0.0.0.0', port=8080)
