@@ -1,6 +1,17 @@
 # ignore ALL .log files
 *.log
+*.cache
+*.DS_Store
 
 # ignore ALL files in ANY directory named temp
 venv/
 __pycache__/
+
+env
+.env
+.vscode
+.data
+cert.pem
+key.pem
+.dockerignore
+.gitignore
