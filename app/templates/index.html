@@ -17,14 +17,19 @@
             This app was created by <a href="http://www.stevendiffey.co.uk">Steven Diffey</a> to get a list of working days to include in invoices. The raw data is available at <a href="https://www.api.gov.uk/gds/bank-holidays/#bank-holidays">The Bank Holidays API</a>.
         </div>
         <div class="jumbotron">
+    {% if not month_year %}
             <form action="" method="get">
                 <input type="month" name="month" value="{{ current_month_yyyy_mm }}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}" onchange="this.form.submit()">
                 
             </form>
-    {% if not month_year %}
             
     {% else %}
-
+    
+            <form action="" method="get">
+                <input type="month" name="month" value="{{month_year}}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}" onchange="this.form.submit()">
+                
+            </form>
+            
             <h4 class="display-4">{{numberOfWorkingDays}} working days in {{month_name}} {{year}}</h4>
             
             
