@@ -18,8 +18,8 @@
         </div>
         <div class="jumbotron">
             <form action="" method="get">
-                <input type="month" name="month" value="{{ current_month_yyyy_mm }}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}">
-                <input type="submit" value="Get working dates" class="btn btn-primary">
+                <input type="month" name="month" value="{{ current_month_yyyy_mm }}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}" onchange="this.form.submit()">
+                
             </form>
     {% if not month_year %}
             
