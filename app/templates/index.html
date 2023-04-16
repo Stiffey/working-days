@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+        <!-- Favicon -->
+        <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+
       </head> 
 <body>
     <div class="container pt-5">
@@ -19,14 +23,14 @@
         <div class="jumbotron">
     {% if not month_year %}
             <form action="" method="get">
-                <input type="month" name="month" value="{{ current_month_yyyy_mm }}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}" onchange="this.form.submit()">
+                <input type="month" name="month" value="{{ date_picker_spec["current_month"] }}" max="{{ date_picker_spec["maximum_date"] }}" min="{{ date_picker_spec["minimum_date"] }}" onchange="this.form.submit()">
                 
             </form>
             
     {% else %}
     
             <form action="" method="get">
-                <input type="month" name="month" value="{{month_year}}" max="{{ max_date_yyyy_mm }}" min="{{ min_date_yyyy_mm }}" onchange="this.form.submit()">
+                <input type="month" name="month" value="{{month_year}}" max="{{ date_picker_spec["maximum_date"] }}" min="{{ date_picker_spec["minimum_date"] }}" onchange="this.form.submit()">
                 
             </form>
             

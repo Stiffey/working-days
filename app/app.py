@@ -36,7 +36,15 @@ def workingDays():
     if month_year is None:
         day = "Select a date"
         logging.info('No month selected')
-        return render_template('index.html', day=day, current_month_yyyy_mm=current_month_yyyy_mm, min_date_yyyy_mm=min_date_yyyy_mm, max_date_yyyy_mm=max_date_yyyy_mm)
+        date_picker_spec = {
+                            "day" : day,
+                            "current_month" : current_month_yyyy_mm,
+                            "minimum_date" : min_date_yyyy_mm,
+                            "maximum_date" : max_date_yyyy_mm
+                            }
+
+        return render_template('index.html', date_picker_spec=date_picker_spec)
+    
     else:
         month_year_split = month_year.split("-")
         month = month_year_split[1]
@@ -59,7 +67,7 @@ def workingDays():
                 ukHolidayDate = list(ukHolidaysJSON[eventIterator].values())[1]
                 ukHolidayList.append(ukHolidayDate)
                 eventIterator += 1
-
+            
             # Calculate days in the month
             daysInMonth = monthrange(int(yearInput), int(monthInput))[1] # Extract the number of days in the month
 
@@ -71,7 +79,7 @@ def workingDays():
             delta = edate - sdate     # as timedelta
 
         except:
-            return "Dodgy month"
+            return "Date not found"
 
         # Find all of the business days in the month
         numberOfWorkingDays = 0
@@ -93,16 +101,22 @@ def workingDays():
                 numberOfHolidays += 1
 
         # Make a list of public holidays
-        public_holiday_list = [ title["title"] for title in ukHolidaysJSON if datetime.strptime(title["date"], '%Y-%m-%d').date() > sdate and datetime.strptime(title["date"], "%Y-%m-%d").date() < edate ]
-    
+        public_holiday_list = [
+            title["title"]
+            for title in ukHolidaysJSON if datetime.strptime(title["date"],
+                                                                '%Y-%m-%d').date() >= sdate and datetime.strptime(title["date"], "%Y-%m-%d").date() <= edate ]
+        
+
         public_holiday_list.reverse()
 
-        return render_template('index.html', day=workingDay, month_year=month_year, month=month, year=year, numberOfWorkingDays=numberOfWorkingDays, numberOfHolidays=numberOfHolidays, month_name=month_name, public_holidays=public_holidays, public_holiday_list=public_holiday_list, current_month_yyyy_mm=current_month_yyyy_mm, min_date_yyyy_mm=min_date_yyyy_mm, max_date_yyyy_mm=max_date_yyyy_mm)
+        date_picker_spec = {
+                    "day" : day,
+                    "current_month" : current_month_yyyy_mm,
+                    "minimum_date" : min_date_yyyy_mm,
+                    "maximum_date" : max_date_yyyy_mm
+                    }
 
-# if __name__ == "__main__":
-#     # app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
-#     # app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
-#     app.run('0.0.0.0', port=8080)
+        return render_template('index.html', date_picker_spec=date_picker_spec, day=workingDay, month_year=month_year, month=month, year=year, numberOfWorkingDays=numberOfWorkingDays, numberOfHolidays=numberOfHolidays, month_name=month_name, public_holidays=public_holidays, public_holiday_list=public_holiday_list)
 
 @app.errorhandler(404)
 def handle_bad_request(e):
